@@ -7,20 +7,18 @@ import os
 import chromadb
 
 from dotenv import load_dotenv
-#from google import genai
 from llm.groq_client import generate_structured
 from pydantic import BaseModel
 
+
 load_dotenv()
-
-#client = genai.Client(
-#    api_key=os.getenv("GEMINI_API_KEY")
-#)
-
-#MODEL = "gemini-3.5-flash"
 
 
 class CandidateCDE(BaseModel):
+    model_config = {
+        "extra": "forbid"
+    }
+
     name: str
     description: str
     criticality: str
@@ -32,6 +30,10 @@ class CandidateCDE(BaseModel):
 
 
 class CandidateCDEList(BaseModel):
+    model_config = {
+        "extra": "forbid"
+    }
+
     candidates: list[CandidateCDE]
 
 
@@ -182,15 +184,6 @@ SOURCE EVIDENCE:
 
 {evidence_text}
 """
-
-    #response = client.models.generate_content(
-    #    model=MODEL,
-    #    contents=prompt,
-    #    config={
-    #        "response_mime_type": "application/json",
-    #        "response_schema": CandidateCDEList,
-    #    },
-    #)
 
     response_text = generate_structured(
         prompt,

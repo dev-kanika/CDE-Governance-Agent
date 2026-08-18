@@ -1,6 +1,7 @@
-from cde_extractor import retrieve_evidence, analyze_cdes
+from agent.cde_extractor import retrieve_evidence, analyze_cdes
 from guardrails.evidence_validator import validate_candidates
-
+from ingestion.document_reader import read_uploaded_document
+from retrieval.upload_retriever import retrieve_uploaded_evidence
 
 def run_agent(question):
 
@@ -65,6 +66,58 @@ def display_results(validations):
     print("\n" + "=" * 60)
     print("Note: Final CDE designation is a human governance decision.")
     print("=" * 60)
+
+def run_document_agent(file_bytes, filename):
+
+    question = """
+    Identify candidate Critical Data Elements (CDEs) in this document.
+    Look for data elements that are important for business or regulatory
+    outputs, calculations or determinations, identification or linking,
+    ownership or aggregation, or validation and reconciliation.
+    Use only evidence contained in the uploaded document.
+    """
+
+    print("\n📄 Reading uploaded document...")
+
+    documents = read_uploaded_document(
+        file_bytes,
+        filename
+    )
+
+    print(
+        f"Extracted {len(documents)} document section(s)."
+    )
+
+    print("\n🔎 Retrieving relevant evidence...")
+
+    evidence = retrieve_uploaded_evidence(
+        documents,
+        question,
+        n_results=5
+    )
+
+    print(
+        f"Retrieved {len(evidence)} evidence chunks."
+    )
+
+    print("\n🧠 Analyzing candidates...")
+
+    result = analyze_cdes(
+        question,
+        evidence
+    )
+
+    print(
+        f"Found {len(result.candidates)} candidate(s)."
+    )
+
+    print("\n🛡️ Validating candidates...")
+
+    validations = validate_candidates(
+        result.candidates
+    )
+
+    return result, validations
 
 
 if __name__ == "__main__":
