@@ -1,4 +1,4 @@
-# CDE Governance Agent
+# CDE Governance Agent 🛡️
 
 **Live App:** https://cde-governance-agent.streamlit.app/
 
@@ -101,6 +101,6 @@ GROQ_API_KEY=your_api_key_here
 
 This project demonstrates an end-to-end AI-assisted data governance workflow, including document ingestion, semantic evidence retrieval, LLM-based CDE discovery, evidence validation, human governance review and deployment as a working Streamlit application.
 
-## Disclaimer
+## Disclaimer 
 
 This is a decision-support prototype. AI-generated results should be reviewed by appropriate data-governance professionals before being used for formal regulatory, compliance or business decisions.
