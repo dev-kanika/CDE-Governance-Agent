@@ -6,3 +6,4 @@ pymupdf
 sentence-transformers
 groq
 pandas
+python-docx==1.2.0
