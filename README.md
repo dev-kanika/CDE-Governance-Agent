@@ -4,6 +4,10 @@
 
 An AI-powered data governance assistant that identifies potential **Critical Data Elements (CDEs)** from regulatory and business documents, validates the evidence behind them, and presents the results for human governance review.
 
+<p align="center">
+  <img src="cde-governance-agent-banner.png" alt="CDE Governance AI Agent" width="100%">
+</p>
+
 ## What Does It Do?
 
 **Upload a document → Find relevant evidence → Identify candidate CDEs → Validate the claims → Review → Export**
